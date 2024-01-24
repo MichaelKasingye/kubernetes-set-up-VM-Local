@@ -97,7 +97,7 @@ kubectl config current-context
 you get:<br/>
 ``my-user``
 
-OK, given that we are done with that. Let's set up a load balancer using metallb.
+OK, given that we are done with that. Let's set up a load balancer solution using metallb.
 
 ## METALLB
 
