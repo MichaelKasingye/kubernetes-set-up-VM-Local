@@ -100,5 +100,43 @@ you get:<br/>
 OK, given that we are done with that. Let's set up a load balancer solution using metallb.
 
 ## METALLB
+MetalLB (Metal Load Balancer) is an open-source, software-based load balancer designed to work with Kubernetes. Kubernetes is a popular container orchestration platform that automates the deployment, scaling, and management of containerized applications. While Kubernetes provides many features for managing containers, it doesn't include an integrated solution for load balancing external traffic to services within the cluster.
 
+MetalLB fills this gap by enabling a network load balancer for Kubernetes clusters that can distribute incoming traffic to services running within the cluster. It allows you to expose services externally using standard IP protocols, such as TCP and UDP.
 
+https://metallb.universe.tf/installation/
+
+#### Installation by manifest
+To install MetalLB, apply the manifest:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+```
+Create a layer 2 yaml confifugration like this;
+
+For example, the following configuration gives MetalLB control over IPs from 192.168.1.240 to 192.168.1.250, and configures Layer 2 mode:
+
+```bash
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 142.93.222.42-142.93.222.47
+```
+
+use this to see the IP ranges for your cluster:
+```bash
+kubectl get nodes -o wide
+```
+you get;
+
+```
+NAME                   STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP     OS-IMAGE                         KERNEL-VERSION   CONTAINER-RUNTIME
+my-user                Ready    <none>   42d   v1.28.2   10.122.0.2    142.93.222.42   Debian GNU/Linux 12 (bookworm)   6.1.0-12-amd64   containerd://1.6.22
+```
+ Yours could be different. And will shall use the external IP.
+
+## ADD A PROJECT RESOURCE
