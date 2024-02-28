@@ -140,6 +140,8 @@ my-user                Ready    <none>   42d   v1.28.2   10.122.0.2    142.93.22
  Yours could be different. And will use the external IP.
 
 ## ADD A PROJECT RESOURCE
+create a folder called quote and in it create a yaml file called ``deployment.yaml`` 
+
 ```bash
 apiVersion: apps/v1
 kind: Deployment
@@ -232,3 +234,7 @@ deployment.apps/quote  1/1       1            1           2d12h
 NAME                     DESIRED   CURRENT   READY   AGE
 replicaset.apps/quote-6c8f564ff   1         1         1       2d12h
 ```
+## Add INGRESS RESOURCES
+
+
+
