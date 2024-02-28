@@ -88,7 +88,7 @@ switch context to have access to the VM ``my-user`` kubernetes:
 kubectl config use-context my-user
 ```
 you get:<br/>
-``Switched to context "production-novasuites".``
+``Switched to context "my-user".``
 
 now check the current context you are in;
 ```bash
@@ -137,6 +137,98 @@ you get;
 NAME                   STATUS   ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP     OS-IMAGE                         KERNEL-VERSION   CONTAINER-RUNTIME
 my-user                Ready    <none>   42d   v1.28.2   10.122.0.2    142.93.222.42   Debian GNU/Linux 12 (bookworm)   6.1.0-12-amd64   containerd://1.6.22
 ```
- Yours could be different. And will shall use the external IP.
+ Yours could be different. And will use the external IP.
 
 ## ADD A PROJECT RESOURCE
+```bash
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: quote-backend
+  name: quote-backend
+  namespace: develop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quote-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: quote-backend
+    spec:
+      containers:
+        - image: docker.io/datawire/quote:0.4.1
+          imagePullPolicy: IfNotPresent
+          name: quote-backend
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: PORT
+              value: '9000'
+      imagePullSecrets:
+        - name: pullsecret
+      restartPolicy: Always
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: quote-backend
+  labels:
+    service: quote-backend
+  namespace: develop
+spec:
+  selector:
+    app: quote-backend
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9000
+      targetPort: 9000
+      nodePort: 30030
+    - name: https
+      protocol: TCP
+      port: 9005
+      targetPort: 9005
+      nodePort: 30031
+
+
+```
+
+Create the develop namespace:
+```bash
+kubectl create ns develop
+```
+
+Apply the resource like this
+```bash
+kubectl apply -f quote/deployment.yaml
+```
+Check if everything is running;
+
+```bash
+kubectl -n develop get all
+```
+
+you will see something like this;
+However yours may show more information like services running in that name space;
+
+```bash
+NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/quote  1/1       1            1           2d12h
+
+NAME                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/quote-6c8f564ff   1         1         1       2d12h
+```
