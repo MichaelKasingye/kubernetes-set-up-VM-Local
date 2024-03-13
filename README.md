@@ -100,6 +100,10 @@ you get:<br/>
 OK, given that we are done with that. Let's set up a load balancer solution using metallb.
 
 ## METALLB
+
+### NOTE
+When deploying on DigitalOcean you will not need METALLB site it has a loadbalancing solution. 
+
 MetalLB (Metal Load Balancer) is an open-source, software-based load balancer designed to work with Kubernetes. Kubernetes is a popular container orchestration platform that automates the deployment, scaling, and management of containerized applications. While Kubernetes provides many features for managing containers, it doesn't include an integrated solution for load balancing external traffic to services within the cluster.
 
 MetalLB fills this gap by enabling a network load balancer for Kubernetes clusters that can distribute incoming traffic to services running within the cluster. It allows you to expose services externally using standard IP protocols, such as TCP and UDP.
