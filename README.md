@@ -242,6 +242,9 @@ deployment.apps/quote  1/1       1            1           2d12h
 NAME                     DESIRED   CURRENT   READY   AGE
 replicaset.apps/quote-6c8f564ff   1         1         1       2d12h
 ```
+## SET UP ARGOCD
+
+
 ## Add INGRESS RESOURCES
 
 
