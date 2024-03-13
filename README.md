@@ -1,4 +1,4 @@
-#### Resource - https://www.youtube.com/watch?v=MpovOI5eK58
+#### Resource - https://www.youtube.com/watch?v=MpovOI5eK58  - digital ocean set up
 
 
 
