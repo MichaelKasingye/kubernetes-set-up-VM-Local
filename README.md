@@ -1,3 +1,7 @@
+#### Resource - https://www.youtube.com/watch?v=MpovOI5eK58
+
+
+
 # KUBERNETES SET UP TUTORIAL
 
 Kubernetes Use context, ngnix-ingreress, cert manager on Ubuntu VM
