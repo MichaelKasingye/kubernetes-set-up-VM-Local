@@ -5,6 +5,8 @@
 
 https://www.youtube.com/watch?v=VHJ6qM9EVbs
 
+#### [pullImage secrets](https://www.youtube.com/watch?v=XE76fyM9XyE)
+
 
 # KUBERNETES SET UP TUTORIAL
 
