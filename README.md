@@ -1,5 +1,9 @@
-#### Resource - https://www.youtube.com/watch?v=MpovOI5eK58  - digital ocean set up
+#### Resource  DigitalOcean K8s- https://www.youtube.com/watch?v=MpovOI5eK58  - digital ocean set up
+#### Resource  DigitalOcean K8s- [https://www.youtube.com/watch?v=MpovOI5eK58](https://www.youtube.com/watch?v=VHJ6qM9EVbs
+)  - digital ocean set up
 
+
+https://www.youtube.com/watch?v=VHJ6qM9EVbs
 
 
 # KUBERNETES SET UP TUTORIAL
