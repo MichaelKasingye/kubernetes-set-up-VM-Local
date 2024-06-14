@@ -253,11 +253,94 @@ ArgoCD is a declarative, GitOps-based continuous delivery tool for Kubernetes. I
 
 #### [ArgoCD LINk](https://argo-cd.readthedocs.io/en/stable/)
 
+### Quick Start
 
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+This will create a new namespace, argocd, where Argo CD services and application resources will live.
 
+#### Run
 
+```bash
+kubectl -n argocd get all
+```
+To view the running pods and services.
 
+If they are running then add an argocd resource called ``argocd-server-nodeport.yaml`` .
+```bash
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/part-of: argocd
+  name: argocd-server-nodeport
+  namespace: argocd
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30007
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30008
+  selector:
+    app.kubernetes.io/name: argocd-server
+  sessionAffinity: None
+  type: NodePort
+```
 
+and apply it ->  ``kubectl apply -f argocd-server-nodeport.yaml``.
+
+This will run the argoCD GUI on the browser. -> `` IP:30007 ``
+
+#### Initialize password in ArgoCD
+
+``` bash 
+argocd admin initial-password -n argocd
+```
+The initial password for the admin account is auto-generated and stored as clear text in the field password in a secret named argocd-initial-admin-secret.
+
+After getting the password login with that password as ``Admin``. Via the side bar go to the settings sections and update password.
+
+Connect your gitOps repository or repository you want the ArgoCD to monitor to trigger in sync. - [RESOURCE](https://argo-cd.readthedocs.io/en/stable/getting_started/#6-create-an-application-from-a-git-repository) -
+
+#### Run the application in ArgoCD
+Create a yaml resource called ``application.yaml`` and add this resource below:
+
+```bash
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myproject-develop
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: environments/staging
+    repoURL: https://github.com/myusername/myproject-gitops
+    targetRevision: develop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+```
+and apply it ->  ``kubectl apply -f application.yaml``.
+
+That will trigger the deployment of your application on ArgoCD.
+
+ 
 ## Add INGRESS RESOURCES
 
 
