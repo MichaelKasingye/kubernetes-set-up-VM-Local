@@ -249,6 +249,13 @@ NAME                     DESIRED   CURRENT   READY   AGE
 replicaset.apps/quote-6c8f564ff   1         1         1       2d12h
 ```
 ## SET UP ARGOCD
+ArgoCD is a declarative, GitOps-based continuous delivery tool for Kubernetes. It automates the deployment of applications to Kubernetes clusters, ensuring that the live state of your applications matches the desired state specified in a Git repository. Key features of ArgoCD include: GitOps Integration, Continuous Sync, Real-time Monitoring, Rollbacks, Multi-cluster Support.
+
+#### [ArgoCD LINk](https://argo-cd.readthedocs.io/en/stable/)
+
+
+
+
 
 
 ## Add INGRESS RESOURCES
