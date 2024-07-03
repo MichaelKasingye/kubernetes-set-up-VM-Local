@@ -57,7 +57,8 @@ users:
     client-key-data: <base64-encoded-client-key-data>
 ```
 
-Edit the above respectively to your context in your local contex. but first access the config file ```bash
+Edit the above respectively to your context in your local contex. but first access the config file 
+```bash
 cd ~/.kube
 ```  
 then
