@@ -350,5 +350,52 @@ That will trigger the deployment of your application on ArgoCD.
  
 ## Add INGRESS RESOURCES
 
+##### Ingress-ngnix
+
+```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+```
+##### Update repo
+
+```bash
+helm repo update
+
+```
+##### Create Ingress-ngnix  namespace
+```bash
+kubectl create ns ingress-nginx
+```
+##### Create the ingress-ngnix resource
+```bash
+helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
+```
+
+## Add CERT-MANAGER
+
+```bash
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.1/cert-manager.crds.yaml
+```
+This allows you to easily uninstall and reinstall cert-manager without deleting your installed custom resources.
+
+Check if CRDS have been created.
+
+```bash
+kubectl get crds
+```
+
+To install the chart with the release name cert-manager:
+
+```bash
+## Add the Jetstack Helm repository
+helm repo add jetstack https://charts.jetstack.io --force-update
+
+## Install the cert-manager helm chart
+helm install cert-manager --namespace cert-manager --version v1.15.1 jetstack/cert-manager
+```
+##### Create cert-manager namespace
+
+```bash
+kubectl create namespace cert-manager
+```
 
 
