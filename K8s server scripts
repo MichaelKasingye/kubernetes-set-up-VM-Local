@@ -1,1 +1,5 @@
 
+
+kubectl apply -f environments/develop/deployment.yaml
+kubectl apply -f environments/develop/namespace.yaml 
+
