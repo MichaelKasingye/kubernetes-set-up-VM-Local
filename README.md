@@ -372,6 +372,12 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
 
 ## Add CERT-MANAGER
 
+##### Create cert-manager namespace
+
+```bash
+kubectl create namespace cert-manager
+```
+
 ```bash
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.1/cert-manager.crds.yaml
 ```
@@ -392,10 +398,6 @@ helm repo add jetstack https://charts.jetstack.io --force-update
 ## Install the cert-manager helm chart
 helm install cert-manager --namespace cert-manager --version v1.15.1 jetstack/cert-manager
 ```
-##### Create cert-manager namespace
 
-```bash
-kubectl create namespace cert-manager
-```
 
 
