@@ -160,6 +160,10 @@ my-user                Ready    <none>   42d   v1.28.2   10.122.0.2    142.93.22
 ```
  Yours could be different. And will use the external IP.
 
+
+<br/>
+After trigger the manifest that has the above resource.
+
 ## ADD A PROJECT RESOURCE
 create a folder called quote and in it create a yaml file called ``deployment.yaml`` 
 
