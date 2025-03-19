@@ -387,7 +387,7 @@ kubectl create namespace cert-manager
 ```
 
 ```bash
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.1/cert-manager.crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.1/cert-manager.crds.yaml
 ```
 This allows you to easily uninstall and reinstall cert-manager without deleting your installed custom resources.
 
@@ -404,7 +404,7 @@ To install the chart with the release name cert-manager:
 helm repo add jetstack https://charts.jetstack.io --force-update
 
 ## Install the cert-manager helm chart
-helm install cert-manager --namespace cert-manager --version v1.15.1 jetstack/cert-manager
+helm install cert-manager --namespace cert-manager --version v1.17.1 jetstack/cert-manager
 ```
 
 
