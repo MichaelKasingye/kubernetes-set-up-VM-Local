@@ -407,5 +407,70 @@ helm repo add jetstack https://charts.jetstack.io --force-update
 helm install cert-manager --namespace cert-manager --version v1.17.1 jetstack/cert-manager
 ```
 
+Now apply the manefest that hold the yaml script for letsencrypt cert manager and ngnix-ssl-ingress
 
+e.g
+##### letsencrypt cert manager
 
+```bash
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: your-email@example.com  # Change to your email
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod-secret
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+```
+
+##### ngnix-ssl-ingress
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: example.com  # Change to your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: example-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - example.com
+      secretName: example-tls-secret  # The secret where the TLS certificate will be stored
+```
+
+let's confirm by checking the orders, certificate requests and certificate.
+
+###### orders
+```bash
+kubectl -n namespace get order
+```
+
+###### certificate requests 
+```bash
+kubectl -n namespace get certificaterequest
+```
+
+###### certificate
+```bash
+kubectl -n namespace get certificate
+```
