@@ -474,3 +474,9 @@ kubectl -n namespace get certificaterequest
 ```bash
 kubectl -n namespace get certificate
 ```
+##### Note
+- A Certificate resource requests a certificate.
+- cert-manager creates an Order to fulfill the request.
+- The Order results in a CertificateRequest sent to the CA.
+- If approved, a signed certificate is issued and stored in a Kubernetes secret.
+
