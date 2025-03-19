@@ -354,6 +354,8 @@ That will trigger the deployment of your application on ArgoCD.
  
 ## Add INGRESS RESOURCES
 
+link - https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
+
 ##### Ingress-ngnix
 
 ```bash
