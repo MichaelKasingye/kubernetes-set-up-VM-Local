@@ -376,6 +376,8 @@ helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx
 
 ## Add CERT-MANAGER
 
+link - https://artifacthub.io/packages/helm/cert-manager/cert-manager
+
 ##### Create cert-manager namespace
 
 ```bash
