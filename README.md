@@ -324,6 +324,10 @@ After getting the password login with that password as ``Admin``. Via the side b
 
 Connect your gitOps repository or repository you want the ArgoCD to monitor to trigger in sync. - [RESOURCE](https://argo-cd.readthedocs.io/en/stable/getting_started/#6-create-an-application-from-a-git-repository) -
 
+#### accessURL
+
+url - https://102.217.901.100:30007/login
+
 #### Run the application in ArgoCD
 Create a yaml resource called ``application.yaml`` and add this resource below:
 
