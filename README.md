@@ -498,3 +498,5 @@ NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP
 ingress-nginx-controller             LoadBalancer   10.25.25.14   13.594.542.230   80:30275/TCP,443:31110/TCP   1y65d
 ingress-nginx-controller-admission   ClusterIP      11.25.80.38     <none>          443/TCP                      1y65d
 ```
+
+Example would this IP - ``13.594.542.230 ``
