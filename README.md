@@ -492,6 +492,7 @@ you can get the Node public IP address to the set up a domain name or use the lo
 kubectl -n ingress-nginx get svc
 
 ```
+to get;
 
 ```
 NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                      AGE
@@ -500,3 +501,45 @@ ingress-nginx-controller-admission   ClusterIP      11.25.80.38     <none>      
 ```
 
 Example would this IP - ``13.594.542.230 ``
+
+
+### NOTE
+#### Connect ArgoCD to domain name
+look into this link - https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#traefik-v30
+
+Examle YAML
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer-production
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+
+    # ---- RATE LIMITING ----
+    nginx.ingress.kubernetes.io/limit-rps: "5"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "2"
+    nginx.ingress.kubernetes.io/limit-connections: "20"
+  labels:
+    app: argocd-server-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - argocd.monitor.domain.app
+      secretName: letsencrypt-argocd-monitor-tls-key
+  rules:
+    - host: argocd.monitor.domain.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server-nodeport
+                port:
+                  number: 80
+```
