@@ -322,7 +322,28 @@ The initial password for the admin account is auto-generated and stored as clear
 
 After getting the password login with that password as ``Admin``. Via the side bar go to the settings sections and update password.
 
+#### CD connection ArgoCD
 Connect your gitOps repository or repository you want the ArgoCD to monitor to trigger in sync. - [RESOURCE](https://argo-cd.readthedocs.io/en/stable/getting_started/#6-create-an-application-from-a-git-repository) -
+
+or 
+- Go to setting on ArgoCD side bar
+- Click Settings and click connect Repo
+- You will get;
+- 
+- <img width="1251" height="860" alt="image" src="https://github.com/user-attachments/assets/7c899922-6741-46f1-80e8-7ec335515896" />
+
+- Choose connection as ``Via SSH``
+- Give it a name
+- Select project as default
+- Add Repo URL as ``https://github.com/user/repo_name``.
+- Add your private SSH key that you used for gitHub Auth access. You can; ``cd ~/.ssh `` then  ``ls `` you get `` config  id_rsa  id_rsa.pub  known_hosts  known_hosts.old `` the you `` cat id_rsa ``
+- It should look like this ``-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC -----
+nIgDb6lFRjhbXnJhMWb---
+CjyeGePmnEGbAAAAGW1pY2hhZWxrYXNpbmd5ZUBnbWFpbC5jb20B
+-----END OPENSSH PRIVATE KEY-----
+  ``
+Once you are done, then connect repo. and you are done. Triiger a the application deployment and you are good to go;
 
 #### accessURL
 
